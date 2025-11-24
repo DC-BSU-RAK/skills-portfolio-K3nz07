@@ -19,7 +19,7 @@ root = setup_window()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
-# Loads and set background image
+
 bg_image = Image.open(os.path.join(SCRIPT_DIR, "Bgimg.jpg"))
 bg_image = bg_image.resize((screen_width, screen_height))
 bg_photo = ImageTk.PhotoImage(bg_image)
@@ -27,7 +27,7 @@ bg_label = Label(root, image=bg_photo)
 bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 bg_label.image = bg_photo
 
-# Loads the frame background image
+
 def load_frame_bg(frame):
     frame_img = Image.open(os.path.join(SCRIPT_DIR, "framebgimg.png"))
     frame.update_idletasks()
@@ -71,7 +71,6 @@ def style_button(button, text, width=200, height=50):
     )
     button.image = btn_photo
 
-# Random numbers will be generated based on the selected difficulty level and for each question it will randomly choose between -+
 def randomInt(difficulty):
 
     if difficulty == "Easy":
@@ -85,7 +84,6 @@ def randomInt(difficulty):
 
 def decideOperation():
     return random.choice(['+', '-'])
-
 
 def displayProblem():
     global current_num1, current_num2, current_operation, correct_answer, attempts
@@ -101,14 +99,13 @@ def displayProblem():
     
     attempts = 0
     
-    # Update UI
+
     question_label.config(text=f"Question {current_question + 1} of {total_questions}")
     problem_label.config(text=f"{current_num1} {current_operation} {current_num2} =")
     answer_entry.delete(0, END)
     feedback_label.config(text="")
     score_label.config(text=f"Score: {score}/100")
     answer_entry.focus()
-
 
 def isCorrect():
     global score, attempts, current_question
@@ -148,7 +145,7 @@ def isCorrect():
             else:
                 root.after(2000, displayResults)
 
-# Display the finals reults screem and shows the grde which he user has earned based on his score
+
 def displayResults():
     if score >= 95:
         grade = "A+"
@@ -241,7 +238,7 @@ game_frame.pack_propagate(False)
 load_frame_bg(game_frame)
 
 
-# Main Menu
+
 menu_title = Label(button_frame, text="Test Your Math Skills!", 
                    font=("Arial", 16), fg="white", bg="grey")
 menu_title.pack(pady=(60, 20))
@@ -259,12 +256,12 @@ style_button(exit_button, "Exit")
 exit_button.pack(pady=12)
 
 
-# Select Difficulty Screen
+
 difficulty_title = Label(quiz_frame, text="Select Difficulty", 
                         font=("Arial", 28, "bold"), fg="#ffffff", bg="#1C1C1C")
 difficulty_title.pack(pady=(20, 10))
 
-# Difficulty Buttons
+
 easy_button = Button(quiz_frame, bd=0)
 style_button(easy_button, "Easy")
 easy_button.pack(pady=12)
@@ -281,7 +278,7 @@ difficulty_back_button = Button(quiz_frame, command=show_menu, bd=0)
 style_button(difficulty_back_button, "Back")
 difficulty_back_button.pack(pady=(24, 8))
 
-# Quiz Game Screen
+
 question_label = Label(game_frame, text="Question 1 of 10", font=("Arial", 16), 
                       fg="#cccccc", bg="#1C1C1C")
 question_label.pack(pady=(20, 5))
@@ -302,7 +299,7 @@ answer_entry = Entry(answer_frame, font=("Arial", 28), width=12, justify=CENTER,
 answer_entry.pack(padx=10)
 answer_entry.bind('<Return>', lambda e: isCorrect())
 
-# Loads the button background for submit button
+
 submit_btn_img = Image.open(os.path.join(SCRIPT_DIR, "buttonsbg.png"))
 submit_btn_img = submit_btn_img.resize((220, 50))
 submit_btn_photo = ImageTk.PhotoImage(submit_btn_img)
@@ -322,7 +319,7 @@ score_label = Label(game_frame, text="Score: 0/100", font=("Arial", 16, "bold"),
                    fg="#4CAF50", bg="#1C1C1C")
 score_label.pack(pady=8)
 
-# Loads the button background for back button
+
 back_btn_img = Image.open(os.path.join(SCRIPT_DIR, "buttonsbg.png"))
 back_btn_img = back_btn_img.resize((180, 40))
 back_btn_photo = ImageTk.PhotoImage(back_btn_img)
@@ -335,7 +332,6 @@ game_back_button.image = back_btn_photo
 game_back_button.pack(pady=10)
 
 
-# Instructions Screen
 instructions_title = Label(instructions_frame, text="How to Play", 
                           font=("Arial", 32, "bold"), fg="#F0F5F0", bg="#1C1C1C")
 instructions_title.pack(pady=(40, 30))
@@ -359,7 +355,6 @@ style_button(instructions_back, "Back")
 instructions_back.pack(pady=30)
 
 
-# allows us to connect buttons to their functions
 play_button.config(command=show_quiz)
 instructions_button.config(command=show_instructions)
 
